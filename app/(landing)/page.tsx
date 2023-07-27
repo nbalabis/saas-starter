@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ChevronsUpDown, KeyRound, Puzzle } from "lucide-react";
+import { ChevronsUpDown, Database, KeyRound, Puzzle } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import {
@@ -49,11 +49,6 @@ const tools = [
             </div>
             into your <code className={codeClasses}>.env</code> file
           </li>
-          <li className="text-destructive">
-            Make sure that <code className={codeClasses}>.env</code> is added to
-            your <code className={codeClasses}>.gitignore</code> file before you
-            commit
-          </li>
           <li>
             Add the following to your <code className={codeClasses}>.env</code>{" "}
             file and change the urls to fit your needs to complete the Clerk
@@ -66,9 +61,96 @@ const tools = [
             </code>{" "}
             <br />
           </li>
+          <li className="text-destructive">
+            Make sure that <code className={codeClasses}>.env</code> is added to
+            your <code className={codeClasses}>.gitignore</code> file before you
+            commit
+          </li>
           <li>
             🎉 Congratulations! Your Saas now has complete Clerk authentication
             and authorization
+          </li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    label: "Prisma Database Connection",
+    icon: Database,
+    color: "text-[#4c52bf]",
+    bgColor: "bg-[#4c52bf]/10",
+    content: (
+      <div>
+        <ul className="text-md ml-6 list-disc [&>li]:mt-2">
+          <li>
+            Set up a new database with the provider of your choice. My
+            preference is{" "}
+            <a
+              href="https://dashboard.clerk.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-[#4c52bf]"
+            >
+              Supabase
+            </a>
+          </li>
+          <li>
+            After your database is initialized, paste your
+            <code className={codeClasses}>DATABASE_URL</code>into your{" "}
+            <code className={codeClasses}>.env</code> file
+          </li>
+          <li className="text-destructive">
+            Make sure that <code className={codeClasses}>.env</code> is added to
+            your <code className={codeClasses}>.gitignore</code> file before you
+            commit
+          </li>
+          <li>
+            If you are using Supabase, be sure to store your password somewhere
+            safe as well
+          </li>
+          <li>
+            Add the following to your{" "}
+            <code className={codeClasses}>schema.prisma</code>: <br />
+            <code className={codeClasses}>
+              generator client &#123; <br />
+              &emsp; provider = "prisma-client-js"
+              <br />
+              &#125; <br />
+              <br />
+              datasource db &#123;
+              <br />
+              &emsp; provider = "mysql"
+              <br />
+              &emsp; url = env("DATABASE_URL")
+              <br />
+              &emsp; relationMode = "prisma"
+              <br />
+              &#125;
+            </code>{" "}
+            <br />
+          </li>
+          <li>
+            Define your data schema in{" "}
+            <code className={codeClasses}>schema.prisma</code>
+          </li>
+          <li>
+            Finally, push your new schema to your database and generate your
+            Prisma Client by running the following in your terminal:
+            <br />
+            <div className="text-center">
+              <code className={codeClasses}>npx prisma db push</code>
+              <br />
+              &
+              <br />
+              <code className={codeClasses}>npx prisma generate</code>
+              <br />
+            </div>
+          </li>
+          <li>
+            🎉 Congratulations! You are now ready to connect to your database
+            using Prisma. You can use{" "}
+            <code className={codeClasses}>npx prisma studio</code> to view and
+            edit your data
           </li>
         </ul>
       </div>
