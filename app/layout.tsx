@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import { siteConfig } from "@/config/site";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Saas Starter",
-  description: "My Saas starter",
+  title: siteConfig.name,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
