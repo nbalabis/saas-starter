@@ -8,10 +8,15 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { routeConfig } from "@/config/docs";
+import SubscriptionButton from "@/components/subscription-button";
 
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 
-const Sidebar = () => {
+interface SidebarProps {
+  isSubscribed: boolean;
+}
+
+const Sidebar = ({ isSubscribed = false }: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -45,6 +50,11 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+      {!isSubscribed && (
+        <div className="p-6">
+          <SubscriptionButton isSubscribed={isSubscribed} />
+        </div>
+      )}
     </div>
   );
 };

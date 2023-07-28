@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "./sidebar";
 
-const MobileSidebar = () => {
+interface MobileSidebarProps {
+  isSubscribed: boolean;
+}
+
+const MobileSidebar = ({ isSubscribed = false }: MobileSidebarProps) => {
   return (
     <Sheet>
       <SheetTrigger>
@@ -13,7 +17,7 @@ const MobileSidebar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar />
+        <Sidebar isSubscribed={isSubscribed} />
       </SheetContent>
     </Sheet>
   );

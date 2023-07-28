@@ -2,10 +2,14 @@ import { UserButton } from "@clerk/nextjs";
 
 import MobileSidebar from "./mobile-sidebar";
 
-const Navbar = () => {
+interface NavbarProps {
+  isSubscribed: boolean;
+}
+
+const Navbar = ({ isSubscribed = false }: NavbarProps) => {
   return (
     <div className="flex items-center p-4">
-      <MobileSidebar />
+      <MobileSidebar isSubscribed={isSubscribed} />
       <div className="flex w-full justify-end">
         <UserButton afterSignOutUrl="/" />
       </div>
