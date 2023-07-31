@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ChevronsUpDown, Database, KeyRound, Puzzle } from "lucide-react";
+import {
+  ChevronsUpDown,
+  CreditCard,
+  Database,
+  KeyRound,
+  Puzzle,
+} from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import {
@@ -77,8 +83,8 @@ const tools = [
   {
     label: "Prisma Database Connection",
     icon: Database,
-    color: "text-[#4c52bf]",
-    bgColor: "bg-[#4c52bf]/10",
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
     content: (
       <div>
         <ul className="text-md ml-6 list-disc [&>li]:mt-2">
@@ -86,12 +92,12 @@ const tools = [
             Set up a new database with the provider of your choice. My
             preference is{" "}
             <a
-              href="https://dashboard.clerk.com"
+              href="https://planetscale.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#4c52bf]"
+              className="text-muted-foreground hover:text-emerald-500"
             >
-              Supabase
+              Planetscale
             </a>
           </li>
           <li>
@@ -105,37 +111,17 @@ const tools = [
             commit
           </li>
           <li>
-            If you are using Supabase, be sure to store your password somewhere
-            safe as well
-          </li>
-          <li>
-            Add the following to your{" "}
-            <code className={codeClasses}>schema.prisma</code>: <br />
-            <code className={codeClasses}>
-              generator client &#123; <br />
-              &emsp; provider = "prisma-client-js"
-              <br />
-              &#125; <br />
-              <br />
-              datasource db &#123;
-              <br />
-              &emsp; provider = "mysql"
-              <br />
-              &emsp; url = env("DATABASE_URL")
-              <br />
-              &emsp; relationMode = "prisma"
-              <br />
-              &#125;
-            </code>{" "}
-            <br />
+            If you are using Planetscale, be sure to store your password
+            somewhere safe as well
           </li>
           <li>
             Define your data schema in{" "}
-            <code className={codeClasses}>schema.prisma</code>
+            <code className={codeClasses}>schema.prisma</code> or leave the
+            default schema to allow subscriptions and free trials
           </li>
           <li>
-            Finally, push your new schema to your database and generate your
-            Prisma Client by running the following in your terminal:
+            Finally, push your schema to your database and generate your Prisma
+            Client by running the following in your terminal:
             <br />
             <div className="text-center">
               <code className={codeClasses}>npx prisma db push</code>
@@ -151,6 +137,66 @@ const tools = [
             using Prisma. You can use{" "}
             <code className={codeClasses}>npx prisma studio</code> to view and
             edit your data
+          </li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    label: "Stripe Payments",
+    icon: CreditCard,
+    color: "text-[#635bff]",
+    bgColor: "bg-[#635bff]/10",
+    content: (
+      <div>
+        <ul className="text-md ml-6 list-disc [&>li]:mt-2">
+          <li>
+            Log in to your{" "}
+            <a
+              href="https://dashboard.stripe.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-[#635bff]"
+            >
+              Stripe
+            </a>{" "}
+            account and follow the instructions to create a new store
+          </li>
+          <li>
+            Next, find your API keys and paste your Secret Key into your{" "}
+            <code className={codeClasses}>.env</code>file as{" "}
+            <code className={codeClasses}>STRIPE_SECRET_KEY</code>
+          </li>
+          <li>
+            Add{" "}
+            <code className={codeClasses}>
+              NEXT_PUBLIC_APP_URL=http://localhost:3000
+            </code>{" "}
+            to your <code className={codeClasses}>.env</code> (you can update
+            this once your app is deployed)
+          </li>
+          <li>
+            Go to the 'Webhooks' section of your Stripe dashboard and select
+            'Test in a local environment'
+          </li>
+          <li>Follow the instructions to download the Stripe CLI and login</li>
+          <li>
+            Paste the following into your terminal to forward Stripe events to
+            your webhook
+            <br />
+            <code className={codeClasses}>
+              stripe listen --forward-to localhost:3000/api/webhook
+            </code>
+          </li>
+          <li>
+            You should get a webhook signing secret to add to your{" "}
+            <code className={codeClasses}>.env</code>file as{" "}
+            <code className={codeClasses}>STRIPE_WEBHOOK_SECRET</code>
+          </li>
+          <li className="text-destructive">
+            Make sure that <code className={codeClasses}>.env</code> is added to
+            your <code className={codeClasses}>.gitignore</code> file before you
+            commit
           </li>
         </ul>
       </div>

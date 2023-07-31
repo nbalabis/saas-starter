@@ -51,7 +51,7 @@ const Sidebar = ({ isSubscribed = false }: SidebarProps) => {
         </div>
       </div>
       {!isSubscribed && (
-        <div className="p-6">
+        <div className="p-6 text-center">
           <SubscriptionButton isSubscribed={isSubscribed} />
         </div>
       )}
